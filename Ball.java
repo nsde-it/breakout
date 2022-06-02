@@ -16,8 +16,8 @@ public class Ball {
         x = 50;
         y = 50;
         radius = 10;
-        dX = 0.2;
-        dY = 0.3;
+        dX = 3;
+        dY = 5;
         pen.bewegeBis(x,y);
         pen.wechsle(); //bedeutet, dass der Stift zwischen radiere() und normal() hin und herwechselt.
         pen.zeichneKreis(radius);
