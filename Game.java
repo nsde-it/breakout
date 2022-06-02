@@ -34,8 +34,9 @@ public class Game {
 
     public void run() {
         while (!exitBtn.wurdeGedrueckt()) {
-            Hilfe.kurzePause();
+            Hilfe.pause(16);
             ball.move();
+            slider.move();
             //if (!ball.didLose()) {               
             //    ball.move();
             //}
