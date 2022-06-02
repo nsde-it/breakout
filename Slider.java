@@ -1,4 +1,5 @@
 import basis.*;
+import java.awt.Color;
 
 public class Slider {
     private Ball ball;
@@ -6,7 +7,8 @@ public class Slider {
     private Stift pen;
     private Leinwand canvas;
     private int x, y;
-    private int radius;
+    private int dY;
+    private Color farbe;
 
     public Slider(Leinwand canv) {
         ball = null;
@@ -15,9 +17,9 @@ public class Slider {
         pen = new Stift(canvas);
         x = canvas.breite()-20; 
         y = mouse.vPosition();
+        dY = -1;
         
-        radius = 10;
-        
+        farbe = Farbe.rgb(0, 255, 0);
         //this.show();
     } //Schieber
     
@@ -25,17 +27,38 @@ public class Slider {
         ball = b;
     } //lerneBallKennen
 
-    public double getY() {
-        return 2.0;
-    } //yPos
-
+    public void bounce() {
+        if (getY() > 400 || getY() < -1) {
+            dY = -dY;
+        }        
+    }
+    
     public double getX() {
-        return 2.0;
+        return pen.hPosition();
     } //xPos
-
+    
+    public double getY() {
+        return pen.vPosition();
+    } //yPos
+    
+    public void hide() {
+       pen.setzeFuellMuster(Muster.GEFUELLT);
+       pen.setzeFarbe(Farbe.rgb(0, 100, 0));
+       pen.rechteck(540, getY(), 20, 60);
+    }
+    
+    public void show() {
+        pen.normal();
+        pen.setzeFuellMuster(Muster.GEFUELLT);
+        pen.setzeFarbe(farbe);
+        pen.rechteck(540, getY(), 20, 60);
+    }
+  
     public void move () {
-        //ball.bounce();
-        return;
+        //ball.bounce()
+        hide();
+        pen.bewegeAuf(getX(), mouse.vPosition()); 
+        show();
         //if (maus.vPosition()==y) {
         //    return;
         //}
